@@ -1,327 +1,135 @@
-<!DOCTYPE html>
-
+<!doctype html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="Códigos de Barras">
-    <title>Generador de Códigos de Barras</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jsbarcode/3.11.5/JsBarcode.all.min.js"></script>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-```
-    body {
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        min-height: 100vh;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        padding: 20px;
-    }
-
-    .container {
-        background: white;
-        border-radius: 20px;
-        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-        padding: 40px;
-        max-width: 600px;
-        width: 100%;
-    }
-
-    h1 {
-        color: #667eea;
-        text-align: center;
-        margin-bottom: 10px;
-        font-size: 2em;
-    }
-
-    .subtitle {
-        text-align: center;
-        color: #666;
-        margin-bottom: 30px;
-        font-size: 0.9em;
-    }
-
-    .input-group {
-        margin-bottom: 25px;
-    }
-
-    label {
-        display: block;
-        margin-bottom: 8px;
-        color: #333;
-        font-weight: 600;
-    }
-
-    input[type="text"] {
-        width: 100%;
-        padding: 12px 15px;
-        border: 2px solid #e0e0e0;
-        border-radius: 10px;
-        font-size: 16px;
-        transition: all 0.3s;
-        -webkit-appearance: none;
-        appearance: none;
-    }
-
-    input[type="text"]:focus {
-        outline: none;
-        border-color: #667eea;
-        box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
-    }
-
-    .format-group {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-        gap: 10px;
-        margin-bottom: 25px;
-    }
-
-    .format-btn {
-        padding: 10px;
-        border: 2px solid #e0e0e0;
-        background: white;
-        border-radius: 10px;
-        cursor: pointer;
-        transition: all 0.3s;
-        font-weight: 600;
-        color: #666;
-    }
-
-    .format-btn:hover {
-        border-color: #667eea;
-        color: #667eea;
-    }
-
-    .format-btn.active {
-        background: #667eea;
-        border-color: #667eea;
-        color: white;
-    }
-
-    button.generate-btn {
-        width: 100%;
-        padding: 15px;
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        color: white;
-        border: none;
-        border-radius: 10px;
-        font-size: 18px;
-        font-weight: 600;
-        cursor: pointer;
-        transition: transform 0.2s;
-        margin-bottom: 25px;
-    }
-
-    button.generate-btn:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
-    }
-
-    button.generate-btn:active {
-        transform: translateY(0);
-    }
-
-    button.generate-btn:disabled {
-        opacity: 0.6;
-        cursor: not-allowed;
-    }
-
-    .barcode-container {
-        background: #f8f9fa;
-        border-radius: 15px;
-        padding: 30px;
-        text-align: center;
-        display: none;
-    }
-
-    .barcode-container.show {
-        display: block;
-        animation: fadeIn 0.5s;
-    }
-
-    @keyframes fadeIn {
-        from {
-            opacity: 0;
-            transform: translateY(20px);
-        }
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    }
-
-    #barcode {
-        margin: 20px 0;
-    }
-
-    .download-btn {
-        padding: 12px 30px;
-        background: #28a745;
-        color: white;
-        border: none;
-        border-radius: 10px;
-        font-size: 16px;
-        font-weight: 600;
-        cursor: pointer;
-        transition: all 0.3s;
-        margin-top: 15px;
-    }
-
-    .download-btn:hover {
-        background: #218838;
-        transform: translateY(-2px);
-    }
-
-    .error {
-        color: #dc3545;
-        text-align: center;
-        margin-top: 10px;
-        display: none;
-    }
-
-    .error.show {
-        display: block;
-    }
-
-    @media (max-width: 480px) {
-        .container {
-            padding: 25px 20px;
-        }
-
-        h1 {
-            font-size: 1.5em;
-        }
-
-        .format-group {
-            grid-template-columns: repeat(2, 1fr);
-        }
-
-        input[type="text"] {
-            font-size: 16px; /* Evita zoom en iOS */
-        }
-
-        button.generate-btn {
-            padding: 18px;
-            font-size: 17px;
-        }
-    }
-
-    /* Mejoras adicionales para iOS */
-    @supports (-webkit-touch-callout: none) {
-        body {
-            min-height: -webkit-fill-available;
-        }
-        
-        input, button {
-            -webkit-tap-highlight-color: transparent;
-        }
-    }
-</style>
-```
-
+  <meta charset="utf-8" />
+  <title>Generador de códigos de barras</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <style>
+    body { font-family: system-ui, -apple-system, Arial; max-width:720px; margin:28px auto; padding:16px; }
+    label { display:block; margin-top:12px; }
+    input, select, button { padding:8px; font-size:16px; margin-top:6px; width:100%; box-sizing:border-box; }
+    #barcodeWrap { margin-top:18px; text-align:center; }
+    svg { max-width:100%; height:auto; }
+    .controls { display:flex; gap:8px; margin-top:10px; }
+    .controls button { flex:1; }
+    small { color:#666; }
+  </style>
+  <!-- JsBarcode desde CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.5/dist/JsBarcode.all.min.js"></script>
 </head>
 <body>
-    <div class="container">
-        <h1>📦 Generador de Códigos de Barras</h1>
-        <p class="subtitle">Ingresa un número de serie para generar tu código</p>
+  <h1>Generador de códigos de barras</h1>
+  <p>Introduce el número de serie y elige el tipo. Recomendado: <strong>Code128</strong> para seriales alfanuméricos.</p>
 
-```
-    <div class="input-group">
-        <label for="serialNumber">Número de Serie (12-13 dígitos)</label>
-        <input type="text" id="serialNumber" placeholder="Ej: 1234567890123" inputmode="numeric" pattern="[0-9]*" autofocus>
-    </div>
+  <label>Número de serie / texto
+    <input id="value" placeholder="Ej: ABC123456" value="ABC123456" />
+  </label>
 
-    <button class="generate-btn" onclick="generateBarcode()">✨ Generar Código EAN13</button>
+  <label>Formato
+    <select id="format">
+      <option value="CODE128">Code 128 (alfanumérico, recomendado)</option>
+      <option value="EAN13">EAN-13 (solo 13 dígitos)</option>
+      <option value="EAN8">EAN-8 (solo 8 dígitos)</option>
+      <option value="UPC">UPC (12 dígitos)</option>
+      <option value="ITF14">ITF-14</option>
+      <option value="CODE39">Code 39</option>
+    </select>
+  </label>
 
-    <div class="error" id="error"></div>
+  <label>Altura (px)
+    <input id="height" type="number" value="80" min="20" />
+  </label>
 
-    <div class="barcode-container" id="barcodeContainer">
-        <svg id="barcode"></svg>
-        <button class="download-btn" onclick="downloadBarcode()">⬇️ Descargar Imagen</button>
-    </div>
-</div>
+  <div class="controls">
+    <button id="generate">Generar</button>
+    <button id="downloadSvg">Descargar SVG</button>
+    <button id="downloadPng">Descargar PNG</button>
+  </div>
 
-<script>
-    // Generar al presionar Enter
-    document.getElementById('serialNumber').addEventListener('keypress', function(e) {
-        if (e.key === 'Enter') {
-            generateBarcode();
-        }
+  <div id="barcodeWrap">
+    <svg id="barcode"></svg>
+    <div id="msg" style="margin-top:8px"></div>
+  </div>
+
+  <script>
+    const valueInput = document.getElementById('value');
+    const formatSelect = document.getElementById('format');
+    const heightInput = document.getElementById('height');
+    const svgEl = document.getElementById('barcode');
+    const msg = document.getElementById('msg');
+
+    function generar() {
+      const val = valueInput.value.trim();
+      const fmt = formatSelect.value;
+      const h = parseInt(heightInput.value) || 80;
+      msg.textContent = '';
+
+      if (!val) { msg.textContent = 'Introduce un número de serie.'; return; }
+      // Validaciones básicas para formatos con longitud fija
+      if (fmt === 'EAN13' && !/^\d{13}$/.test(val)) { msg.textContent = 'EAN-13 requiere exactamente 13 dígitos numéricos.'; return; }
+      if (fmt === 'EAN8'  && !/^\d{8}$/.test(val))  { msg.textContent = 'EAN-8 requiere exactamente 8 dígitos numéricos.'; return; }
+      if (fmt === 'UPC'   && !/^\d{12}$/.test(val)) { msg.textContent = 'UPC requiere exactamente 12 dígitos numéricos.'; return; }
+
+      try {
+        JsBarcode(svgEl, val, {
+          format: fmt,
+          lineColor: "#000",
+          width: 2,
+          height: h,
+          displayValue: true,
+          fontOptions: "",
+          margin: 10
+        });
+      } catch (e) {
+        msg.textContent = 'Error al generar: ' + e.message;
+        console.error(e);
+      }
+    }
+
+    document.getElementById('generate').addEventListener('click', generar);
+
+    document.getElementById('downloadSvg').addEventListener('click', () => {
+      const svgData = new XMLSerializer().serializeToString(svgEl);
+      const blob = new Blob([svgData], {type: 'image/svg+xml;charset=utf-8'});
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'barcode.svg';
+      a.click();
+      URL.revokeObjectURL(url);
     });
 
-    function generateBarcode() {
-        const serial = document.getElementById('serialNumber').value.trim();
-        const errorDiv = document.getElementById('error');
-        const container = document.getElementById('barcodeContainer');
+    document.getElementById('downloadPng').addEventListener('click', () => {
+      const svgData = new XMLSerializer().serializeToString(svgEl);
+      const canvas = document.createElement('canvas');
+      const bbox = svgEl.getBBox();
+      const scale = 2; // mejora resolución
+      canvas.width = Math.max(300, Math.ceil((bbox.width + 20) * scale));
+      canvas.height = Math.ceil((bbox.height + 40) * scale);
+      const ctx = canvas.getContext('2d');
 
-        errorDiv.classList.remove('show');
-        errorDiv.textContent = '';
+      const img = new Image();
+      const svgBlob = new Blob([svgData], {type: 'image/svg+xml;charset=utf-8'});
+      const url = URL.createObjectURL(svgBlob);
+      img.onload = function() {
+        ctx.fillStyle = '#fff';
+        ctx.fillRect(0,0,canvas.width,canvas.height);
+        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+        URL.revokeObjectURL(url);
+        canvas.toBlob(function(blob) {
+          const link = document.createElement('a');
+          link.href = URL.createObjectURL(blob);
+          link.download = 'barcode.png';
+          link.click();
+          URL.revokeObjectURL(link.href);
+        }, 'image/png');
+      };
+      img.onerror = function(){ msg.textContent = 'No se pudo convertir a PNG.'; };
+      img.src = url;
+    });
 
-        if (!serial) {
-            errorDiv.textContent = '⚠️ Por favor ingresa un número de serie';
-            errorDiv.classList.add('show');
-            container.classList.remove('show');
-            return;
-        }
-
-        // Validar que tenga 12 o 13 dígitos para EAN13
-        if (!/^\d{12,13}$/.test(serial)) {
-            errorDiv.textContent = '⚠️ EAN13 requiere 12 o 13 dígitos numéricos';
-            errorDiv.classList.add('show');
-            container.classList.remove('show');
-            return;
-        }
-
-        try {
-            JsBarcode("#barcode", serial, {
-                format: 'EAN13',
-                width: 2,
-                height: 100,
-                displayValue: true,
-                fontSize: 18,
-                margin: 10
-            });
-            container.classList.add('show');
-        } catch (e) {
-            errorDiv.textContent = '❌ Error: ' + e.message;
-            errorDiv.classList.add('show');
-            container.classList.remove('show');
-        }
-    }
-
-    function downloadBarcode() {
-        const svg = document.getElementById('barcode');
-        const svgData = new XMLSerializer().serializeToString(svg);
-        const canvas = document.createElement('canvas');
-        const ctx = canvas.getContext('2d');
-        const img = new Image();
-
-        img.onload = function() {
-            canvas.width = img.width;
-            canvas.height = img.height;
-            ctx.fillStyle = 'white';
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-            ctx.drawImage(img, 0, 0);
-            
-            const link = document.createElement('a');
-            link.download = 'codigo-barras-' + document.getElementById('serialNumber').value + '.png';
-            link.href = canvas.toDataURL('image/png');
-            link.click();
-        };
-
-        img.src = 'data:image/svg+xml;base64,' + btoa(unescape(encodeURIComponent(svgData)));
-    }
-</script>
-```
-
+    // Generar inicialmente
+    generar();
+  </script>
 </body>
 </html>
